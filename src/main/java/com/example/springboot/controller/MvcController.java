@@ -51,7 +51,7 @@ public class MvcController {
 	}
 
 	@PostMapping("/users")
-	public String createUser(@Valid @ModelAttribute(name = "user") UserDto user, BindingResult result, Model model) {
+	public String createUser(@Valid @ModelAttribute(name = "user") UserDto user, BindingResult result) {
 		if (result.hasErrors()) {
 			return "add-user";
 		}
