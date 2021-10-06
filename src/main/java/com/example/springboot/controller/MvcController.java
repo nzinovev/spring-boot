@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -21,6 +22,13 @@ public class MvcController {
 	@GetMapping("/home")
 	public String homePage() {
 		return "home";
+	}
+
+	@GetMapping("/find-user")
+	public String findUser(@RequestParam String email, Model model) {
+		var user = userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		return "user";
 	}
 
 	@GetMapping("/users")

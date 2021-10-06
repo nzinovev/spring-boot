@@ -23,6 +23,11 @@ public class UserService {
 		        .collect(Collectors.toList());
 	}
 
+	public UserDto getUserByEmail(String email) {
+		var user = userRepository.findUserByEmail(email);
+		return userMapper.mapToDto(user);
+	}
+
 	public void createUser(UserDto dto) {
 		var user = userMapper.mapToEntity(dto);
 		userRepository.save(user);
