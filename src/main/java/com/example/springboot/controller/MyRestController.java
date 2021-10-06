@@ -14,30 +14,31 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class MyRestController {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    @GetMapping("/users/{id}")
-    public UserDto getUser(@PathVariable Long id) {
-        return userService.getUser(id);
-    }
+	@GetMapping("/users/{id}")
+	public UserDto getUser(@PathVariable Long id) {
+		return userService.getUser(id);
+	}
 
-    @PostMapping("/users")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public UserDto createUser(@Valid @RequestBody UserDto dto) {
-        if (!dto.getPassword().equals(dto.getConfirmPassword())) {
-            throw new ApiException(HttpStatus.BAD_REQUEST.value(), "Passwords doesn't match");
-        }
-        return userService.createUser(dto);
-    }
+	@PostMapping("/users")
+	@ResponseStatus(value = HttpStatus.CREATED)
+	public UserDto createUser(@Valid @RequestBody UserDto dto) {
+		if (!dto.getPassword()
+		        .equals(dto.getConfirmPassword())) {
+			throw new ApiException(HttpStatus.BAD_REQUEST.value(), "Passwords doesn't match");
+		}
+		return userService.createUser(dto);
+	}
 
-    @PutMapping("/users/{id}")
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto dto) {
-        return userService.updateUser(id, dto);
-    }
+	@PutMapping("/users/{id}")
+	@ResponseStatus(value = HttpStatus.ACCEPTED)
+	public UserDto updateUser(@PathVariable Long id, @RequestBody @Valid UserDto dto) {
+		return userService.updateUser(id, dto);
+	}
 
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable Long id) {
+		userService.deleteUser(id);
+	}
 }

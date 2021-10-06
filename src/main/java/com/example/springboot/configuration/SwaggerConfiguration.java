@@ -15,21 +15,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-    private static final String API_TITLE = "Title";
-    private static final String API_DESCRIPTION = "Description";
+	private static final String API_TITLE = "Title";
+	private static final String API_DESCRIPTION = "Description";
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+		        .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+		        .paths(PathSelectors.any())
+		        .build()
+		        .apiInfo(apiInfo());
+	}
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(API_TITLE)
-                .description(API_DESCRIPTION)
-                .build();
-    }
+	private ApiInfo apiInfo() {
+		return new ApiInfoBuilder().title(API_TITLE)
+		        .description(API_DESCRIPTION)
+		        .build();
+	}
 }
