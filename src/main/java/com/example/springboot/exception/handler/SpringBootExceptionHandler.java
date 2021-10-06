@@ -33,16 +33,10 @@ public class SpringBootExceptionHandler {
 		        .body(new ServiceApiException(ex.getDescription(), ex.getStatus()));
 	}
 
-	@ResponseStatus(BAD_REQUEST)
-	@ExceptionHandler(IllegalArgumentException.class)
-	public ServiceApiException handle(IllegalArgumentException ex) {
-		return new ServiceApiException("some message", BAD_REQUEST.value());
-	}
-
 	@ResponseStatus(INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public ServiceApiException handleUnspecifiedException(Exception ex) {
-		log.error("Unspecified exception has occurred.");
+		log.error("Unspecified exception has occurred. Message: {}", ex.getMessage());
 
 		return new ServiceApiException("some message", INTERNAL_SERVER_ERROR.value());
 	}
