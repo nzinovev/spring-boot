@@ -16,32 +16,39 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class MvcController {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    @GetMapping("/home")
-    public String homePage() {
-        return "home";
-    }
+	@GetMapping("/home")
+	public String homePage() {
+		return "home";
+	}
 
-    @GetMapping("/users")
-    public String users(Model model) {
-        var dtoList = userService.findAll();
-        model.addAttribute("users", dtoList);
-        return "users";
-    }
+	@GetMapping("/users")
+	public String users(Model model) {
+		var dtoList = userService.findAll();
+		model.addAttribute("users", dtoList);
+		return "users";
+	}
 
-    @GetMapping("/sign-up")
-    public String login(@ModelAttribute(name = "user") UserDto user) {
-        return "add-user";
-    }
+	@GetMapping("/sign-up")
+	public String login(@ModelAttribute(name = "user") UserDto user) {
+		return "add-user";
+	}
 
-    @PostMapping("/users")
-    public String createUser(@Valid @ModelAttribute(name = "user") UserDto user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "add-user";
-        }
-        userService.createUser(user);
+	@GetMapping("/break")
+	public String breakTheApp() {
+		UserDto dto = null;
+		dto.getPassword();
+		return "users";
+	}
 
-        return "redirect:/users";
-    }
+	@PostMapping("/users")
+	public String createUser(@Valid @ModelAttribute(name = "user") UserDto user, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "add-user";
+		}
+		userService.createUser(user);
+
+		return "redirect:/users";
+	}
 }

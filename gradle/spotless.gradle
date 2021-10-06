@@ -1,0 +1,13 @@
+spotless {
+    java {
+        target fileTree(projectDir) {
+            include '**/*.java'
+            exclude '**/build/**'
+        }
+
+        removeUnusedImports()
+        eclipse().configFile 'src/main/resources/spotless.xml'
+    }
+}
+
+tasks.build.dependsOn spotlessCheck

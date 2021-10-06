@@ -14,17 +14,17 @@ import javax.persistence.Id;
 @Entity(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String email;
-    private String password;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private String email;
+	private String password;
 
-    public User() {}
+	public User() {}
 
-    public User(UserDto dto) {
-        // validation
-        this.email = dto.getEmail();
-        this.password = dto.getPassword();
-    }
+	public User(UserDto dto) {
+		// validation
+		this.email = dto.getEmail();
+		this.password = dto.getPassword();
+	}
 }

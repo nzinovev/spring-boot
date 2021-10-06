@@ -13,18 +13,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+	private final UserRepository userRepository;
+	private final UserMapper userMapper;
 
-    public List<UserDto> findAll() {
-        var users = userRepository.findAll();
-        return users.stream()
-                .map(userMapper::mapToDto)
-                .collect(Collectors.toList());
-    }
+	public List<UserDto> findAll() {
+		var users = userRepository.findAll();
+		return users.stream()
+		        .map(userMapper::mapToDto)
+		        .collect(Collectors.toList());
+	}
 
-    public void createUser(UserDto dto) {
-        var user = userMapper.mapToEntity(dto);
-        userRepository.save(user);
-    }
+	public void createUser(UserDto dto) {
+		var user = userMapper.mapToEntity(dto);
+		userRepository.save(user);
+	}
 }
