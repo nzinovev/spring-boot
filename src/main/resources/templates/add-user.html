@@ -8,35 +8,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
-<div class="border" th:if="${users.size()} > 0">
-    <h2>Users:</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Email</th>
-            <th>Password</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.password}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<br/>
 <div class="form-group">
-    <form action="#" th:action="@{/users}" th:object="${user}" method="post">
+    <form action="#" th:action="@{/users}" th:object="${user}" method="post" >
         <div class="form-group col-md-6">
             <label for="Email" class="col-form-label">Email</label>
             <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Email">
-<!--            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>-->
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="password" class="col-form-label">Password</label>
             <input type="text" th:field="*{password}" class="form-control" id="password" placeholder="Password">
-<!--            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>-->
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="confirmPassword" class="col-form-label">Confirm password</label>
+            <input type="text" th:field="*{confirmPassword}" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="text-danger"></span>
         </div>
         <div class="row">
             <div class="mt-5 ml-4">
