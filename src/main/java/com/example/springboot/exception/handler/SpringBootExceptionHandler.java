@@ -4,6 +4,7 @@ import com.example.springboot.domain.exception.ServiceApiException;
 import com.example.springboot.exception.model.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -39,5 +40,11 @@ public class SpringBootExceptionHandler {
 		log.error("Unspecified exception has occurred. Message: {}", ex.getMessage());
 
 		return new ServiceApiException("some message", INTERNAL_SERVER_ERROR.value());
+	}
+
+	@ResponseStatus(BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ServiceApiException handleVailidationException(MethodArgumentNotValidException ex) {
+		return new ServiceApiException(BAD_REQUEST.getReasonPhrase(), BAD_REQUEST.value());
 	}
 }
