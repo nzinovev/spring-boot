@@ -33,7 +33,7 @@ public class MyRestController {
 
 	@PutMapping("/users/{id}")
 	@ResponseStatus(value = HttpStatus.ACCEPTED)
-	public UserDto updateUser(@PathVariable Long id, @RequestBody @Valid UserDto dto) {
+	public UserDto updateUser(@PathVariable Long id, @RequestBody UserDto dto) {
 		return userService.updateUser(id, dto);
 	}
 
